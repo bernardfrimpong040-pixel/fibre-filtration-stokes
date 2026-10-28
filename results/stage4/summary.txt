@@ -1,0 +1,34 @@
+3D Ewald sum: largest change with the splitting width = 6.4e-16 (relative)
+3D Ewald sum vs plain Fourier series (eps = 1.5, cell L x L x 1.3L): largest relative difference = 4.1e-15
+3D kernel far field (r >= 6 eps) vs Stokeslet + dipole: largest relative difference = 0.0e+00
+3D kernel: centre values H1(0) = 8/(3 sqrt(pi) eps), H2(0) = 8/(15 sqrt(pi) eps^3) to 0.0e+00; series vs closed form at the switch: 2.3e-14
+3D kernel satisfies the forced Stokes equations: residual / largest term <= 1.8e-06, |div u| / |u| <= 5.2e-07 (finite differences, h = 0.001)
+axial reference vs the Drummond-Tahir series: differences 0.01%-0.26% (alpha 0.01-0.3); change from M = 64 to 128 <= 2.0e-15
+aligned_square  alpha = 0.05: exact k/a^2 =   4.0386; Richardson error +0.054% (eps 0.2/0.4), +0.137% (eps 0.3/0.6); without balance +0.02%; centreline -0.43%
+aligned_square  alpha = 0.10: exact k/a^2 =   1.2652; Richardson error +0.098% (eps 0.2/0.4), +0.127% (eps 0.3/0.6); without balance -0.01%; centreline -0.77%
+aligned_square  alpha = 0.20: exact k/a^2 =   0.3048; Richardson error +0.188% (eps 0.2/0.4), -0.308% (eps 0.3/0.6); without balance -0.20%; centreline +0.31%
+aligned_square  alpha = 0.30: exact k/a^2 =   0.1018; Richardson error +0.114% (eps 0.2/0.4), -2.324% (eps 0.3/0.6); without balance -0.83%; centreline +6.56%
+axial_square    alpha = 0.05: exact k/a^2 =   8.0907; Richardson error +0.032% (eps 0.2/0.4), +0.130% (eps 0.3/0.6); without balance -0.19%; centreline -0.60%
+axial_square    alpha = 0.10: exact k/a^2 =   2.5531; Richardson error +0.042% (eps 0.2/0.4), +0.163% (eps 0.3/0.6); without balance -0.62%; centreline -1.65%
+axial_square    alpha = 0.20: exact k/a^2 =   0.6413; Richardson error +0.045% (eps 0.2/0.4), +0.154% (eps 0.3/0.6); without balance -2.29%; centreline -4.63%
+axial_square    alpha = 0.30: exact k/a^2 =   0.2352; Richardson error +0.019% (eps 0.2/0.4), +0.010% (eps 0.3/0.6); without balance -5.53%; centreline -7.77%
+tilted          alpha = 0.05: exact k/a^2 =   6.5277; Richardson error +0.058% (eps 0.2/0.4), +0.216% (eps 0.3/0.6); without balance -0.04%; centreline -0.17%
+tilted          alpha = 0.10: exact k/a^2 =   2.1965; Richardson error +0.113% (eps 0.2/0.4), +0.366% (eps 0.3/0.6); without balance -0.19%; centreline -0.04%
+tilted          alpha = 0.20: exact k/a^2 =   0.6087; Richardson error +0.240% (eps 0.2/0.4), +0.583% (eps 0.3/0.6); without balance -0.82%; centreline +1.65%
+tilted          alpha = 0.30: exact k/a^2 =   0.2423; Richardson error +0.413% (eps 0.2/0.4), +0.714% (eps 0.3/0.6); without balance -2.03%; centreline +5.55%
+lattices: largest Richardson error (eps 0.2/0.4) = 0.24% for alpha <= 0.2, 0.41% up to alpha = 0.3
+lattices: largest Richardson error (eps 0.3/0.6) = 0.58% for alpha <= 0.2
+pressure balance: without it the axial/tilted Richardson error (eps 0.2/0.4) is up to 2.3% (alpha <= 0.2); with it 0.24%
+no-slip at the blob centres: largest |u|/U = 3.3e-15
+centreline model on lattices: error -4.6% to +1.6% for alpha <= 0.2
+flow inside a fibre (axial square, alpha = 0.1), velocity on the axis / U: with balance -0.255 (eps 0.4), -0.117 (eps 0.2); without -0.178, -0.031; inside flux with balance -1.11% and -0.78% of U
+centreline line of 3D blobs vs 2D one-blob model (alpha = 0.1): relative difference 2.2e-07
+2D random 4-fibre layouts, alpha = 0.1: largest Richardson error 0.53% (eps 0.2/0.4), 1.07% (0.25/0.5), 2.12% (0.3/0.6)
+2D random 4-fibre layouts, alpha = 0.15: largest Richardson error 0.44% (eps 0.2/0.4), 0.88% (0.25/0.5), 1.85% (0.3/0.6)
+2D random 4-fibre layouts, alpha = 0.2: largest Richardson error 1.01% (eps 0.2/0.4), 2.10% (0.25/0.5), 4.42% (0.3/0.6)
+cubic3 alpha = 0.2: k/a^2 = 0.4092 (Richardson), 0.4093 (eps^2 fit to 0.3, 0.2): difference 0.02%; k_x/k_z - 1 = 1.8e-08; centreline +2.7%
+cubic3 alpha = 0.1: k/a^2 = 1.6490 (Richardson); k_x/k_z - 1 = 2.0e-09; centreline +0.3%
+disc points 2h instead of h apart: k changes by at most 0.25% (axial 0.1, tilted 0.1 and 0.2, cubic3 0.2)
+permeability tensors are symmetric (as reciprocity requires): largest |K - K^T|/|K| = 5.0e-07
+timing: largest system 3360 blobs (10080 unknowns): assembly 48 s, LU factorization 10 s, whole solve 103 s
+total run time 20.3 minutes

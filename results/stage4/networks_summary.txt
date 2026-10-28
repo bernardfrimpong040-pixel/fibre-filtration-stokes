@@ -1,0 +1,21 @@
+alpha = 0.1: aligned networks (12): 3D surface method vs exact, largest error 0.21%, mean 0.09%
+  2D random arrays,  4 fibres (200 layouts): k_perp = 1.4977 +- 0.0338, k_par = 3.7214 +- 0.0753, k_par/k_perp = 2.48
+  2D random arrays, 16 fibres (40 layouts): k_perp = 1.5163 +- 0.0809, k_par = 4.3999 +- 0.2733, k_par/k_perp = 2.90
+  placement check (100 parallel-fibre networks placed by the 3D code, exact 2D k): k_perp = 1.4931 +- 0.0497; ratio to the 2D layouts 0.997 [0.959, 1.038]
+  the 12 aligned 3D networks: k_z = 1.3105 +- 0.1628
+  layered, through the mat  (20): k/a^2 = 1.5888 +- 0.0799 (sd/mean 0.11); rule (4-fibre 2D) 1.4977: ratio 1.061 [1.008, 1.116]; rule (16-fibre 2D) 1.5163: ratio 1.048 [0.976, 1.122]; centreline error mean +2.9%, worst 6.7%
+  layered, in the plane     (20): k/a^2 = 2.0845 +- 0.0568 (sd/mean 0.06); rule (4-fibre 2D) 2.1358: ratio 0.976 [0.944, 1.010]; rule (16-fibre 2D) 2.2554: ratio 0.924 [0.870, 0.975]; centreline error mean +2.9%, worst 6.1%
+  cubic, any direction      (20): k/a^2 = 1.7751 +- 0.0293 (sd/mean 0.04); rule (4-fibre 2D) 1.8702: ratio 0.949 [0.924, 0.974]; rule (16-fibre 2D) 1.9401: ratio 0.915 [0.864, 0.959]; centreline error mean +1.8%, worst 3.6%
+  layered anisotropy k_in-plane / k_through = 1.33 +- 0.07; rule predicts 1.43
+  classical: Jackson-James 2.0574 (cubic random / JJ = 0.863), Kuwabara 1.2470 (layered through / Kuwabara = 1.274), Davies 1.8716; regular cubic lattice 1.6490 (random/lattice 1.076)
+alpha = 0.15: aligned networks (12): 3D surface method vs exact, largest error 1.10%, mean 0.26%
+  2D random arrays,  4 fibres (200 layouts): k_perp = 0.6237 +- 0.0130, k_par = 1.6857 +- 0.0336, k_par/k_perp = 2.70
+  2D random arrays, 16 fibres (40 layouts): k_perp = 0.6159 +- 0.0231, k_par = 1.9345 +- 0.0791, k_par/k_perp = 3.14
+  placement check (100 parallel-fibre networks placed by the 3D code, exact 2D k): k_perp = 0.6177 +- 0.0185; ratio to the 2D layouts 0.990 [0.955, 1.026]
+  the 12 aligned 3D networks: k_z = 0.5493 +- 0.1078
+  layered, through the mat  (20): k/a^2 = 0.6948 +- 0.0469 (sd/mean 0.14); rule (4-fibre 2D) 0.6237: ratio 1.114 [1.050, 1.194]; rule (16-fibre 2D) 0.6159: ratio 1.128 [1.054, 1.217]; centreline error mean +4.4%, worst 12.0%
+  layered, in the plane     (20): k/a^2 = 0.9663 +- 0.0357 (sd/mean 0.08); rule (4-fibre 2D) 0.9106: ratio 1.061 [1.024, 1.102]; rule (16-fibre 2D) 0.9343: ratio 1.034 [0.987, 1.081]; centreline error mean +4.1%, worst 11.2%
+  cubic, any direction      (20): k/a^2 = 0.8228 +- 0.0185 (sd/mean 0.05); rule (4-fibre 2D) 0.7895: ratio 1.042 [1.014, 1.071]; rule (16-fibre 2D) 0.7970: ratio 1.032 [0.991, 1.071]; centreline error mean +3.6%, worst 6.2%
+  layered anisotropy k_in-plane / k_through = 1.41 +- 0.08; rule predicts 1.46
+  classical: Jackson-James 0.9661 (cubic random / JJ = 0.852), Kuwabara 0.5716 (layered through / Kuwabara = 1.216), Davies 0.9048
+all 104 networks: permeability tensors symmetric to 8.5e-05 (largest |K - K^T|/|K|)

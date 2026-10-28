@@ -143,3 +143,64 @@ def reference_k(layout, points_per_fibre=128, U=(1.0, 0.0)):
     r = ReferenceBIE2D(layout, points_per_fibre)
     r.solve(U)
     return r.dimensionless_permeability()
+
+
+class ReferenceAxialBIE2D:
+    """Exact reference for flow ALONG parallel fibres (axial flow, main.tex Eq. 7.11).
+
+    The axial velocity w(x, y) obeys the scalar problem  mu lap w = dp/dz  with w = 0 on the
+    fibres. Its free-space Green's function is -(1/(2 pi mu)) ln r, and the periodic one is the
+    TRACE of our 2D periodic Stokes kernel (tr(I - k k / k^2) = 1 in 2D), so we reuse the same
+    Ewald code and the same exact logarithmic quadrature as ReferenceBIE2D:
+        w(x) = W + sum_m integral G_P(x - y) q(y) ds(y),      w = 0 at M points per circle,
+    and the axial permeability is k_par = mu W A / |sum q ds|."""
+
+    def __init__(self, layout, points_per_fibre=128, mu=1.0):
+        self.layout, self.mu = layout, mu
+        self.M = points_per_fibre
+        c, a = layout["centres"], layout["radii"]
+        self.n_fib = len(a)
+        t = 2 * np.pi * np.arange(self.M) / self.M
+        self.pts = np.vstack([c[m] + a[m] * np.column_stack([np.cos(t), np.sin(t)]) for m in range(self.n_fib)])
+        self.ds = np.concatenate([np.full(self.M, 2 * np.pi * a[m] / self.M) for m in range(self.n_fib)])
+        eps0 = TINY_EPS_FACTOR * min(layout["Lx"], layout["Ly"])
+        self.periodic = PeriodicStokeslet2D(layout["Lx"], layout["Ly"], eps0, mu=mu)
+        self.eps0 = eps0
+
+    def solve(self, W=1.0):
+        M = self.M
+        Pxx, _, Pyy = self.periodic.blocks(self.pts, self.pts)
+        A = (Pxx + Pyy) * self.ds                      # trace = periodic Laplace Green's function / mu
+        logW = log_weights(M)
+        for m in range(self.n_fib):
+            sl = slice(m * M, (m + 1) * M)
+            p = self.pts[sl]
+            a = self.layout["radii"][m]
+            ds = 2 * np.pi * a / M
+            Kxx, _, Kyy = stokeslet_blocks_2d(p, p, self.eps0, self.mu)
+            A[sl, sl] -= (Kxx + Kyy) * ds                 # remove the singular free-space part ...
+            A[sl, sl] += (-np.log(a) * ds + a * logW) / (2 * np.pi * self.mu)   # ... and add it exactly
+        sol, *_ = np.linalg.lstsq(A, -np.full(len(self.pts), W), rcond=1e-13)
+        self.W, self.q = W, sol
+        return sol
+
+    def permeability(self):
+        """Darcy uses the SUPERFICIAL velocity: the flux through the fluid only, divided by the
+        cell area. Inside each fibre this single-layer solution is not at rest: there
+        mu lap w = Q/A (Q = total force per length), a uniform pipe-flow driving, so with w = 0 on
+        the circle w_in = (Q/(4 mu A)) (r^2 - a^2), whose flux is -pi a^4 Q / (8 mu A).
+        We subtract it (main.tex Eq. 7.10)."""
+        area = self.layout["Lx"] * self.layout["Ly"]
+        Q = np.sum(self.q * self.ds)
+        interior_flux = sum(-np.pi * a**4 * Q / (8 * self.mu * area) for a in self.layout["radii"])
+        W_sup = self.W - interior_flux / area
+        return self.mu * abs(W_sup) * area / abs(Q)
+
+    def dimensionless_permeability(self):
+        return self.permeability() / np.mean(self.layout["radii"]) ** 2
+
+
+def reference_k_axial(layout, points_per_fibre=128):
+    r = ReferenceAxialBIE2D(layout, points_per_fibre)
+    r.solve()
+    return r.dimensionless_permeability()

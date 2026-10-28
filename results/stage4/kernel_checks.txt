@@ -1,0 +1,5 @@
+3D Ewald sum: largest change with the splitting width = 6.4e-16 (relative)
+3D Ewald sum vs plain Fourier series (eps = 1.5, cell L x L x 1.3L): largest relative difference = 4.1e-15
+3D kernel far field (r >= 6 eps) vs Stokeslet + dipole: largest relative difference = 0.0e+00
+3D kernel: centre values H1(0) = 8/(3 sqrt(pi) eps), H2(0) = 8/(15 sqrt(pi) eps^3) to 0.0e+00; series vs closed form at the switch: 2.3e-14
+3D kernel satisfies the forced Stokes equations: residual / largest term <= 1.8e-06, |div u| / |u| <= 5.2e-07 (finite differences, h = 0.001)
