@@ -13,7 +13,7 @@ q_F = -ln(P) / dP?
 
 | Stage | Content | Status |
 |---|---|---|
-| 1 | Literature check, classical baselines, project set-up | Done (thesis/code review pending) |
+| 1 | Literature check, classical baselines, project set-up | Done |
 | 2 | Theory and model formulation | — |
 | 3 | 2D solver, validation, convergence | — |
 | 4 | 3D solver and permeability | — |
