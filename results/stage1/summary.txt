@@ -1,0 +1,4 @@
+fibre diameter d_f = 3.0 um, alpha = 0.1, L = 0.5 mm, U0 = 0.1 m/s
+Kuwabara permeability k = 2.806e-12 m^2, pressure drop = 322.6 Pa
+MPPS = 0.207 um, penetration at MPPS = 0.357
+quality factor at MPPS = 3.1902e-03 1/Pa

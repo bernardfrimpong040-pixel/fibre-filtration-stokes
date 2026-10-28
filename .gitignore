@@ -1,0 +1,20 @@
+# Python virtual environment and caches
+.venv/
+__pycache__/
+*.pyc
+
+# The paper is kept private (not pushed to GitHub)
+paper/
+
+# Large or temporary outputs
+results/**/_can_fail_tmp/
+results/**/raw/
+*.npy
+*.npz
+*.h5
+
+# Editor / OS clutter
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
