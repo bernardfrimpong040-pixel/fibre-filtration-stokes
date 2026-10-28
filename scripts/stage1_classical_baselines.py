@@ -41,7 +41,7 @@ models = {
     "Kuwabara (cell model)": cm.k_kuwabara,
     "Happel (cell model)": cm.k_happel,
     "Square array (Sangani-Acrivos / Drummond-Tahir)": cm.k_drummond_tahir_square,
-    "Hexagonal array (Sangani-Acrivos series)": cm.k_drummond_tahir_hex,
+    "Hexagonal array (dilute series)": cm.k_drummond_tahir_hex,
     "Davies (empirical, real filters)": cm.k_davies,
     "Jackson-James (3D random)": cm.k_jackson_james_3d,
 }

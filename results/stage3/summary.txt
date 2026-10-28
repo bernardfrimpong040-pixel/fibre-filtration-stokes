@@ -1,0 +1,14 @@
+reference vs Sangani-Acrivos table: largest relative difference = 1.8e-04 (alpha 0.05-0.5)
+reference: change from M = 64 to 128 points per fibre <= 7.5e-13
+truncated dilute series: error 0.08% at alpha = 0.1, 14% at alpha = 0.3, 500% at alpha = 0.5
+hexagonal reference: C = 1.4955 at alpha = 1e-3 (series 1.4975 - 2 alpha = 1.4955); series error 0.006% at alpha = 0.1
+effective radius: (a_eff - R)/eps -> 0.2824 as eps -> 0 (Proposition 6: 1/(2 sqrt(pi)) = 0.2821); next term 0.35 eps^2/R
+square alpha=0.3, eps = 0.05a: error -6.4% without offset, -0.51% with the rule, -0.016% with Richardson (0.05a, 0.1a)
+observed order (eps 0.05a -> 0.025a): 1.04 without offset, 1.98 with the rule
+all three regular arrays: |error| <= 2.0% at eps = 0.1a with the rule, <= 0.11% with Richardson (0.1a, 0.2a)
+eps/h = 1.00: leakage Q+ = 3.3e-07, condition number = 5.4e+06; eps/h = 2.01: condition number = 3.5e+16
+leakage decay: Q+ ~ exp(-c (eps/h)^2) with fitted c = 11.1 (ripple theory: pi^2 = 9.87); chord and positive-part fluxes agree to 2e-02 where above round-off
+near-fibre velocity error at distance 0.2a: 1.9% (eps 0.1a), 0.5% (0.05a), 0.12% (0.025a)
+random arrays (16 fibres, gaps >= 0.2a): |error| <= 3.3% at eps = 0.1a, <= 0.39% with Richardson (0.1a, 0.2a)
+timing (16 fibres): N = 2016 blobs, assembly 26 s, dense solve 0.4 s, GMRES 122 matrix-vector products; GMRES and dense agree to 2e-12
+total run time 282 s

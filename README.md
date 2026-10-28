@@ -15,7 +15,7 @@ q_F = -ln(P) / dP?
 |---|---|---|
 | 1 | Literature check, classical baselines, project set-up | Done |
 | 2 | Theory, model formulation, our own 2D kernels | Done |
-| 3 | 2D solver, validation, convergence | — |
+| 3 | 2D solver, validation, convergence, random 2D arrays | Done |
 | 4 | 3D solver and permeability | — |
 | 5 | Particle transport and capture efficiency | — |
 | 6 | Design study and sensitivity analysis | — |
@@ -27,13 +27,21 @@ q_F = -ln(P) / dP?
 src/classical_models.py              cell-model permeability and single-fibre efficiency formulas
 src/rs_kernels.py                    our 2D Gaussian regularized Stokeslet (velocity, pressure)
 src/periodic.py                      our doubly periodic version (Ewald summation)
+src/geometry.py                      fibre layouts: square, hexagonal, random mono-/polydisperse
+src/solver2d.py                      our 2D regularized Stokeslet solver (dense LU or GMRES)
+src/reference_bie.py                 independent exact reference: spectral boundary integral (circles only)
 scripts/stage1_classical_baselines.py tables and figures of the classical baselines
 scripts/stage2_kernel_checks.py      numerical evidence for the Stage 2 propositions, with figures
+scripts/stage3_validation.py         validation against Sangani & Acrivos, convergence, leakage, timing
+scripts/stage3_random_arrays.py      experiment (a): 480 random layouts, each checked against the reference
+scripts/stage3_random_summary.py     statistics and figure for experiment (a)
+scripts/stage3_cv_test.py            why 40 layouts: control test with nearly identical fibres
 scripts/make_bib.py                   builds paper/refs.bib from the literature table
 checks/check_stage1.py                all Stage 1 checks (and proof that each check can fail)
 checks/check_stage2.py                all Stage 2 checks, plus a re-run of the Stage 1 checks
+checks/check_stage3.py                all Stage 3 checks, plus a re-run of the Stage 1 and 2 checks
 literature/literature_table.csv       every reference, its role, and how it was verified
-results/stage1/, results/stage2/     CSV outputs and summary numbers
+results/stage1/ ... results/stage3/  CSV outputs and summary numbers
 paper/                                LaTeX draft (kept out of GitHub)
 ```
 
@@ -50,7 +58,16 @@ python scripts\make_bib.py
 python checks\check_stage1.py
 python scripts\stage2_kernel_checks.py
 python checks\check_stage2.py
+python scripts\stage3_validation.py
+python scripts\stage3_random_arrays.py
+python scripts\stage3_random_summary.py
+python scripts\stage3_cv_test.py
+python checks\check_stage3.py
 ```
+
+`stage3_random_arrays.py` takes about 80-90 minutes on one core; it saves every result as it goes and
+continues where it stopped if interrupted. To use two cores, run `python scripts\stage3_random_arrays.py 0.05 0.3`
+and `python scripts\stage3_random_arrays.py 0.1 0.2` in two windows at the same time.
 
 ## Stage 1 results (classical baseline)
 
@@ -75,6 +92,21 @@ These are the numbers the regularized Stokeslet simulations will be compared aga
   within 0.8% of the cylinder permeability (full square-array series) at alpha = 0.1.
 - Net flux out of a fibre is always zero (Proposition 1), so leakage is measured by the positive-part
   and chord fluxes: 31% for 8 tiny blobs, about 1e-6 when the blob width matches the spacing.
+
+## Stage 3 results (2D solver and random arrays)
+
+- An independent exact reference (spectral boundary integral) reproduces the Sangani & Acrivos (1982)
+  square-array drag to 2e-4 for solid fractions 0.05-0.5; it also corrected the hexagonal dilute
+  constant used in Stage 1 (1.4975, not 1.490).
+- Proposition 6: a ring of blobs acts like a no-slip cylinder of radius R + eps/(2 sqrt(pi)). Pulling
+  the blobs in by that amount turns first-order into second-order convergence; with Richardson
+  extrapolation the error is 0.1% at eps = 0.1a for regular arrays.
+- Experiment (a), 480 random layouts of 16 fibres, each checked against the reference (RS error:
+  mean 0.07%, worst 1.0%): random arrays are 39% more permeable than regular arrays at alpha = 0.05 and
+  18% at 0.1; the advantage disappears by 0.2-0.3. Cell models therefore underestimate random media.
+- Fibre-size spread (CV 0.5) raises k by 34-50%; scaling by the r.m.s. radius (Proposition 7)
+  removes about 60% of that, and the first logarithmic correction explains the rest in dilute media.
+- k varies by 17-39% between 16-fibre layouts, so 40 layouts per case are used.
 
 ## Scope
 

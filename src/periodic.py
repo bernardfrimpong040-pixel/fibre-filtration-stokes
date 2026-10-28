@@ -16,7 +16,7 @@ forever in both directions. Every blob therefore has infinitely many copies
 
 The split uses Hasimoto's factor H(k) = (1 + xi^2 k^2 / 4) exp(-xi^2 k^2 / 4).
 With it, the short-range part dies off like exp(-r^2/s^2) with s^2 = eps^2 + xi^2,
-so only the 5 x 5 block of nearest copies is needed. The answer does not depend
+so only the nearest copies are needed (3 x 3 after wrapping; more are added automatically if eps is large). The answer does not depend
 on the splitting width xi; the check script tests exactly that.
 
 The zero Fourier mode (k = 0) is left out. Physically this means: the net push
@@ -68,18 +68,24 @@ class PeriodicStokeslet2D:
         Sxx, Sxy, Syy = P.blocks(x_eval, x_src)   # velocity per unit force, zero cell mean
     """
 
-    def __init__(self, Lx, Ly, eps, mu=1.0, xi=None, n_images=2, tol=36.0):
+    def __init__(self, Lx, Ly, eps, mu=1.0, xi=None, n_images=None, tol=36.0):
         self.Lx, self.Ly, self.eps, self.mu = float(Lx), float(Ly), float(eps), float(mu)
         self.area = self.Lx * self.Ly
-        # splitting width: small enough that the short-range part is negligible
-        # beyond n_images copies (exp(-tol) ~ 2e-16 at distance n_images * L)
+        # splitting width xi: the short-range part decays like exp(-r^2/s^2), s^2 = eps^2 + xi^2
         self.xi = xi if xi is not None else min(Lx, Ly) / 6.0
         self.s = np.sqrt(self.eps**2 + self.xi**2)
+        # How many copies are needed: separations are first wrapped into the central cell
+        # (|dx| <= Lx/2), so every copy we leave out is at least (n_images + 1/2) * L away,
+        # where the short-range part is about exp(-((n_images + 1/2) L / s)^2).
+        # By default we take the smallest n_images that makes this below exp(-tol):
+        # with xi = L/6 and a small blob that is n_images = 1 (a 3 x 3 block of copies).
+        if n_images is None:
+            n_images = int(np.ceil(np.sqrt(tol) * self.s / min(Lx, Ly) - 0.5))
+            n_images = max(n_images, 1)
         self.n_images = n_images
-        # Guard: the copies we leave out sit at least n_images * min(Lx, Ly) away, where the
-        # short-range part is about exp(-(distance/s)^2). If eps is not well below xi this is
-        # not negligible, so we refuse rather than return an inaccurate kernel.
-        if (self.n_images * min(Lx, Ly)) ** 2 / self.s**2 < tol:
+        # Guard: if the caller asked for too few copies, refuse rather than return an
+        # inaccurate kernel.
+        if ((self.n_images + 0.5) * min(Lx, Ly)) ** 2 / self.s**2 < tol:
             raise ValueError("blob width eps too large for this cell: increase n_images or reduce eps")
 
         # Fourier wavevectors k = 2 pi (m/Lx, n/Ly), keeping only those where the

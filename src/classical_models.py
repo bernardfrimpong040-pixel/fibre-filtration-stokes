@@ -80,12 +80,13 @@ def k_drummond_tahir_square(alpha, a):
 
 
 def k_drummond_tahir_hex(alpha, a):
-    """Hexagonal array, flow perpendicular to the fibres: leading terms of the
-    Sangani & Acrivos (1982) dilute series,
-    k/a^2 = [ln(1/alpha) - 1.490 + 2 alpha - alpha^2/2] / (8 alpha).
-    (Truncated series: treat values above alpha ~ 0.3 with care.)"""
+    """Hexagonal array, flow perpendicular to the fibres: leading terms of the dilute series,
+    k/a^2 = [ln(1/alpha) - 1.4975 + 2 alpha - alpha^2/2] / (8 alpha).
+    The constant 1.4975 is confirmed by our exact reference solver (main.tex Sec. 5.2) and
+    agrees with Drummond & Tahir's 1.497. (An earlier version used 1.490, which is wrong.)
+    Truncated series: treat values above alpha ~ 0.3 with care."""
     alpha = np.asarray(alpha, dtype=float)
-    return a**2 * (np.log(1.0 / alpha) - 1.490 + 2.0 * alpha - 0.5 * alpha**2) / (8.0 * alpha)
+    return a**2 * (np.log(1.0 / alpha) - 1.4975 + 2.0 * alpha - 0.5 * alpha**2) / (8.0 * alpha)
 
 
 def k_davies(alpha, a):

@@ -1,11 +1,11 @@
 max |div u| (finite differences) = 1.91e-07
 max Stokes residual / max term size = 8.02e-06
 at r = 4 eps: error vs Stokeslet = 6.25e-02, vs Stokeslet+dipole = 7.03e-09
-Ewald: relative change when xi goes from L/5 to L/8 = 7.2e-16
-Ewald vs plain Fourier series: relative difference = 8.1e-16
+Ewald: relative change when xi goes from L/5 to L/8 = 4.5e-16
+Ewald vs plain Fourier series: relative difference = 5.4e-16
 one-blob periodic array: C = 1.4762 at alpha = 1e-4 (Hasimoto 1.476)
 one-blob periodic array: C = 1.2982 at alpha = 0.1; cylinder series gives 1.2897; k differs by 0.8%
 one-blob periodic array: (C - 1.476336)/alpha = -1.78 at alpha = 1e-3 (cylinder: -2)
-fixed fibre, N = 8, eps/spacing = 0.06: net flux = 6.7e-17, positive-part flux = 3.05e-01, chord flux = 3.05e-01 (fractions of U*2a)
-fixed fibre, N = 32, eps/spacing = 0.25: net flux = -5.6e-18, positive-part flux = 2.84e-02, chord flux = 2.84e-02 (fractions of U*2a)
-fixed fibre, N = 32, eps/spacing = 1.02: net flux = -1.3e-17, positive-part flux = 1.08e-06, chord flux = 1.28e-06 (fractions of U*2a)
+fixed fibre, N = 8, eps/spacing = 0.06: net flux = 2.2e-17, positive-part flux = 3.05e-01, chord flux = 3.05e-01 (fractions of U*2a)
+fixed fibre, N = 32, eps/spacing = 0.25: net flux = 0.0e+00, positive-part flux = 2.84e-02, chord flux = 2.84e-02 (fractions of U*2a)
+fixed fibre, N = 32, eps/spacing = 1.02: net flux = -3.1e-18, positive-part flux = 1.08e-06, chord flux = 1.28e-06 (fractions of U*2a)

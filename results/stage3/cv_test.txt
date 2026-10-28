@@ -1,0 +1,4 @@
+first 10 layouts per case: k_poly/k_mono (mean radius) ranges 1.073-1.530
+first 40 layouts per case: k_poly/k_mono (mean radius) ranges 1.043-1.504
+control at alpha = 0.1, first 10 layouts: CV = 0 gives k/a^2 = 1.537 +- 0.272, CV = 0.01 gives 1.546 +- 0.236; ratio 1.006
+control at alpha = 0.1, first 40 layouts: CV = 0 gives k/a^2 = 1.644 +- 0.161, CV = 0.01 gives 1.597 +- 0.081; ratio 0.971
