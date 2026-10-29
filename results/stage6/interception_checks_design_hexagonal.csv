@@ -1,0 +1,4 @@
+structure,seed,alpha,n_fibres,r_p,f_exact,f_tracker,n_particles
+hexagonal,0,0.05,2,0.1,0.003009098890550461,0.0028,10000
+hexagonal,0,0.1,2,0.1,0.006345663115422733,0.0064,10000
+hexagonal,0,0.15,2,0.1,0.010444823203365363,0.0106,10000

@@ -1,0 +1,61 @@
+interception check on all 69 new cells (10000 particles, r_p = 0.1a): largest difference from the exact answer 1.05 particles per fibre; 0 of 6144000 particles left in a cell at the time limit
+bootstrap: largest share of draws whose MPPS falls at an end of the size window 0.0% (hexagonal, base); the hexagonal cell uses the same particle seeds in every design, so its redraws are treated as independent (conservative for the elasticities)
+design base, hexagonal: k/a^2 = 1.2500, pressure drop 321.8 Pa, MPPS 0.245 um, penetration 0.453, q_F 2.46e-03 1/Pa [2.25e-03, 2.58e-03], MPPS 95% interval [0.219, 0.336] um
+design base, random: k/a^2 = 1.5773, pressure drop 255.0 Pa, MPPS 0.241 um, penetration 0.505, q_F 2.68e-03 1/Pa [2.54e-03, 2.83e-03], MPPS 95% interval [0.233, 0.261] um
+design base, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 322.6 Pa, MPPS 0.207 um, penetration 0.396, q_F 2.87e-03 1/Pa
+design d_f=1.5, hexagonal: k/a^2 = 1.2500, pressure drop 1287.1 Pa, MPPS 0.192 um, penetration 0.045, q_F 2.42e-03 1/Pa [2.28e-03, 2.52e-03], MPPS 95% interval [0.179, 0.211] um
+design d_f=1.5, random: k/a^2 = 1.5773, pressure drop 1020.0 Pa, MPPS 0.202 um, penetration 0.055, q_F 2.85e-03 1/Pa [2.74e-03, 2.95e-03], MPPS 95% interval [0.190, 0.211] um
+design d_f=1.5, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 1290.2 Pa, MPPS 0.155 um, penetration 0.017, q_F 3.15e-03 1/Pa
+design d_f=6, hexagonal: k/a^2 = 1.2500, pressure drop 80.4 Pa, MPPS 0.366 um, penetration 0.844, q_F 2.10e-03 1/Pa [1.85e-03, 2.30e-03], MPPS 95% interval [0.308, 0.425] um
+design d_f=6, random: k/a^2 = 1.5773, pressure drop 63.8 Pa, MPPS 0.360 um, penetration 0.848, q_F 2.59e-03 1/Pa [2.24e-03, 2.84e-03], MPPS 95% interval [0.296, 0.377] um
+design d_f=6, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 80.6 Pa, MPPS 0.278 um, penetration 0.808, q_F 2.64e-03 1/Pa
+design U=0.05, hexagonal: k/a^2 = 1.2500, pressure drop 160.9 Pa, MPPS 0.322 um, penetration 0.339, q_F 6.73e-03 1/Pa [6.21e-03, 7.03e-03], MPPS 95% interval [0.285, 0.356] um
+design U=0.05, random: k/a^2 = 1.5773, pressure drop 127.5 Pa, MPPS 0.321 um, penetration 0.387, q_F 7.44e-03 1/Pa [7.22e-03, 7.63e-03], MPPS 95% interval [0.305, 0.344] um
+design U=0.05, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 161.3 Pa, MPPS 0.252 um, penetration 0.295, q_F 7.57e-03 1/Pa
+design U=0.2, hexagonal: k/a^2 = 1.2500, pressure drop 643.5 Pa, MPPS 0.218 um, penetration 0.576, q_F 8.58e-04 1/Pa [7.68e-04, 9.13e-04], MPPS 95% interval [0.181, 0.257] um
+design U=0.2, random: k/a^2 = 1.5773, pressure drop 510.0 Pa, MPPS 0.229 um, penetration 0.580, q_F 1.07e-03 1/Pa [9.85e-04, 1.11e-03], MPPS 95% interval [0.183, 0.251] um
+design U=0.2, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 645.1 Pa, MPPS 0.169 um, penetration 0.490, q_F 1.10e-03 1/Pa
+design alpha=0.05, hexagonal: k/a^2 = 3.9924, pressure drop 100.7 Pa, MPPS 0.274 um, penetration 0.732, q_F 3.10e-03 1/Pa [2.77e-03, 3.35e-03], MPPS 95% interval [0.220, 0.318] um
+design alpha=0.05, random: k/a^2 = 5.2888, pressure drop 76.1 Pa, MPPS 0.299 um, penetration 0.751, q_F 3.77e-03 1/Pa [3.47e-03, 3.97e-03], MPPS 95% interval [0.243, 0.346] um
+design alpha=0.05, classical (Eq. 8.6): k/a^2 = 3.9862, pressure drop 100.9 Pa, MPPS 0.232 um, penetration 0.697, q_F 3.57e-03 1/Pa
+design alpha=0.15, hexagonal: k/a^2 = 0.5735, pressure drop 701.4 Pa, MPPS 0.251 um, penetration 0.285, q_F 1.79e-03 1/Pa [1.65e-03, 1.87e-03], MPPS 95% interval [0.231, 0.276] um
+design alpha=0.15, random: k/a^2 = 0.5367, pressure drop 749.4 Pa, MPPS 0.221 um, penetration 0.287, q_F 1.67e-03 1/Pa [1.46e-03, 1.98e-03], MPPS 95% interval [0.206, 0.228] um
+design alpha=0.15, classical (Eq. 8.6): k/a^2 = 0.5716, pressure drop 703.7 Pa, MPPS 0.189 um, penetration 0.184, q_F 2.40e-03 1/Pa
+design DEHS, hexagonal: k/a^2 = 1.2500, pressure drop 321.8 Pa, MPPS 0.273 um, penetration 0.454, q_F 2.45e-03 1/Pa [2.25e-03, 2.62e-03], MPPS 95% interval [0.237, 0.293] um
+design DEHS, random: k/a^2 = 1.5773, pressure drop 255.0 Pa, MPPS 0.273 um, penetration 0.494, q_F 2.77e-03 1/Pa [2.63e-03, 2.93e-03], MPPS 95% interval [0.249, 0.286] um
+design DEHS, classical (Eq. 8.6): k/a^2 = 1.2470, pressure drop 322.6 Pa, MPPS 0.224 um, penetration 0.414, q_F 2.73e-03 1/Pa
+design base: q_F random / hexagonal 1.088 [1.017, 1.206]; hexagonal / classical 0.858
+design d_f=1.5: q_F random / hexagonal 1.179 [1.115, 1.265]; hexagonal / classical 0.768
+design d_f=6: q_F random / hexagonal 1.231 [1.044, 1.447]; hexagonal / classical 0.798
+design U=0.05: q_F random / hexagonal 1.105 [1.051, 1.198]; hexagonal / classical 0.889
+design U=0.2: q_F random / hexagonal 1.244 [1.126, 1.394]; hexagonal / classical 0.776
+design alpha=0.05: q_F random / hexagonal 1.216 [1.087, 1.373]; hexagonal / classical 0.868
+design alpha=0.15: q_F random / hexagonal 0.932 [0.821, 1.128]; hexagonal / classical 0.743
+design DEHS: q_F random / hexagonal 1.127 [1.031, 1.246]; hexagonal / classical 0.898
+hexagonal: MPPS / classical MPPS 1.18-1.33, q_F at the MPPS / classical 0.743-0.898 over the 8 designs
+random: MPPS / classical MPPS 1.16-1.35, q_F at the MPPS / classical 0.693-1.056 over the 8 designs
+elasticity of q_F to fibre diameter d_f: hexagonal -0.10 [-0.20, -0.02], random -0.07 [-0.17, -0.02], classical -0.13
+elasticity of q_F to face velocity U: hexagonal -1.49 [-1.57, -1.41], random -1.40 [-1.45, -1.37], classical -1.39
+elasticity of q_F to solid fraction alpha: hexagonal -0.50 [-0.61, -0.39], random -0.74 [-0.86, -0.56], classical -0.36
+elasticity of q_F to particle density: hexagonal +0.00 [-0.12, +0.11], random -0.04 [-0.08, +0.02], classical +0.06
+elasticity to solid fraction over 0.05-0.1 and over 0.1-0.15 (secants): hexagonal -0.33 and -0.79, random -0.49 and -1.17, classical -0.32 and -0.44
+random cells at alpha = 0.15: k/a^2 of the six cells 0.889, 0.548, 0.915, 0.580, 0.352, 0.389; harmonic mean 0.5367, arithmetic mean 0.6121 (hexagonal 0.5735)
+fibre-size spread CV = 0.25 / identical (16 cells each): eta at the MPPS 0.934 [0.826, 1.053], pressure drop 0.899 [0.812, 0.987], q_F 1.040 [0.964, 1.125]
+fibre-size spread CV = 0.5 / identical (16 cells each): eta at the MPPS 0.825 [0.730, 0.923], pressure drop 0.733 [0.658, 0.804], q_F 1.126 [1.029, 1.226]
+fibre-size spread CV = 0: k/a^2 = 1.4956, MPPS 0.269 um, eta at the MPPS 0.0330, q_F 2.60e-03 1/Pa
+fibre-size spread CV = 0.25: k/a^2 = 1.6645, MPPS 0.265 um, eta at the MPPS 0.0308, q_F 2.71e-03 1/Pa
+fibre-size spread CV = 0.5: k/a^2 = 2.0415, MPPS 0.272 um, eta at the MPPS 0.0272, q_F 2.93e-03 1/Pa
+consistency: 16 new identical-fibre cells / the 6 cells of experiment (d), eta at 0.169, 0.22, 0.286, 0.371, 0.483 um: 1.000, 1.068, 0.979, 1.036, 1.112
+layered filters use the sizes 0.13-0.483 um common to all layer designs; layers whose worst case is at an end of that range: none
+layered filters (Proposition 10): 55 two-layer stacks; 12 meet condition (c) and 11 raise the worst-case q_F by more than 0.1% over their better layer; largest gain 8.5% [0.0, 16.9] (hexagonal d_f=1.5 + random d_f=6); gain if and only if condition (c) in 55 of 55
+fine (1.5 um) + coarse (6 um) layers, hexagonal: worst-case q_F 2.47e-03 (fine only), 2.10e-03 (coarse only), best stack 2.55e-03 at a fine-layer share of the pressure drop 0.49; coarse layer at the fine layer's MPPS 3.11e-03; gain 3.2% [0.0, 11.5]
+fine (1.5 um) + coarse (6 um) layers, random: worst-case q_F 2.88e-03 (fine only), 2.59e-03 (coarse only), best stack 2.95e-03 at a fine-layer share of the pressure drop 0.39; coarse layer at the fine layer's MPPS 3.05e-03; gain 2.6% [0.0, 6.2]
+fine (1.5 um) + coarse (6 um) layers, classical: worst-case q_F 3.17e-03 (fine only), 2.64e-03 (coarse only), best stack 3.18e-03 at a fine-layer share of the pressure drop 0.81; coarse layer at the fine layer's MPPS 3.24e-03; gain 0.2%
+sensitivity, hexagonal array, eps=0.1 instead of the standard settings (same particles): eta changes by -0.3% at 0.22 um and +0.3% at 0.483 um
+sensitivity, hexagonal array, eps=0.025 instead of the standard settings (same particles): eta changes by +1.9% at 0.22 um and -0.6% at 0.483 um
+sensitivity, hexagonal array, r_out=1.2a instead of the standard settings (same particles): eta changes by +0.4% at 0.22 um and +0.7% at 0.483 um
+sensitivity, hexagonal array, r_out=1.4a instead of the standard settings (same particles): eta changes by -0.8% at 0.22 um and -1.8% at 0.483 um
+sensitivity, hexagonal array, modes=32 instead of the standard settings (same particles): eta changes by +0.0% at 0.22 um and +0.0% at 0.483 um
+sensitivity reference: binomial standard error of one hexagonal value at 0.22 um 2.1% (every variant uses the same particle draws)
+cell size, 32 fibres, 2 cells long (4 cells) / 16-fibre cells (22 cells): eta at 0.22 um 1.043 [0.968, 1.124], eta at 0.483 um 1.081 [0.960, 1.218], k 0.898 [0.736, 1.094] (Welch t-intervals)
+cell size, 36 fibres, 1.5 x 1.5 cells (4 cells) / 16-fibre cells (22 cells): eta at 0.22 um 1.008 [0.934, 1.088], eta at 0.483 um 1.017 [0.866, 1.194], k 0.986 [0.911, 1.066] (Welch t-intervals)

@@ -149,13 +149,13 @@ def eta_diffusion(d_p, d_f, U0, alpha):
     return 2.6 * ((1.0 - alpha) / kuwabara_factor(alpha))**(1.0 / 3.0) * Pe**(-2.0 / 3.0)
 
 
-def eta_impaction(d_p, d_f, U0, alpha):
+def eta_impaction(d_p, d_f, U0, alpha, rho_p=RHO_NACL):
     """Inertial impaction (Hinds 1999): E_I = Stk J / (2 Ku^2), with
     J = (29.6 - 28 alpha^0.62) R^2 - 27.5 R^2.8 for R < 0.4 and J = 2 for R >= 0.4."""
     R = d_p / d_f
     J_fit = (29.6 - 28.0 * alpha**0.62) * R**2 - 27.5 * R**2.8
     J = np.where(R < 0.4, J_fit, 2.0)
-    return stokes_number(d_p, d_f, U0) * J / (2.0 * kuwabara_factor(alpha)**2)
+    return stokes_number(d_p, d_f, U0, rho_p) * J / (2.0 * kuwabara_factor(alpha)**2)
 
 
 def eta_diffusion_interception(d_p, d_f, U0, alpha):
@@ -165,21 +165,26 @@ def eta_diffusion_interception(d_p, d_f, U0, alpha):
     return 1.24 * R**(2.0 / 3.0) / np.sqrt(kuwabara_factor(alpha) * peclet(d_p, d_f, U0))
 
 
-def eta_total(d_p, d_f, U0, alpha):
+def eta_total(d_p, d_f, U0, alpha, rho_p=RHO_NACL):
     """Total single-fibre efficiency (Hinds 1999 rule):
     E = 1 - (1-E_R)(1-E_D)(1-E_DR)(1-E_I), capped at 1
     (a fibre cannot catch more than everything in its path)."""
-    E = 1.0 - (1.0 - eta_interception(d_p, d_f, alpha)) \
-            * (1.0 - eta_diffusion(d_p, d_f, U0, alpha)) \
-            * (1.0 - eta_diffusion_interception(d_p, d_f, U0, alpha)) \
-            * (1.0 - eta_impaction(d_p, d_f, U0, alpha))
+    # each term is a fraction of the particles in the fibre's path, so it is capped at 1 before the
+    # terms are combined (otherwise a term above 1, e.g. impaction of large particles on thin fibres,
+    # would make its factor (1 - E) negative and flip the sign of the product)
+    def cap(E):
+        return np.clip(E, 0.0, 1.0)
+    E = 1.0 - (1.0 - cap(eta_interception(d_p, d_f, alpha))) \
+            * (1.0 - cap(eta_diffusion(d_p, d_f, U0, alpha))) \
+            * (1.0 - cap(eta_diffusion_interception(d_p, d_f, U0, alpha))) \
+            * (1.0 - cap(eta_impaction(d_p, d_f, U0, alpha, rho_p)))
     return np.clip(E, 0.0, 1.0)
 
 
-def penetration(d_p, d_f, U0, alpha, thickness):
+def penetration(d_p, d_f, U0, alpha, thickness, rho_p=RHO_NACL):
     """Fraction of particles that pass through the whole filter (Hinds Eq. 9.12):
     P = exp( -4 alpha E L / (pi (1-alpha) d_f) )."""
-    E = eta_total(d_p, d_f, U0, alpha)
+    E = eta_total(d_p, d_f, U0, alpha, rho_p)
     return np.exp(-4.0 * alpha * E * thickness / (np.pi * (1.0 - alpha) * d_f))
 
 
@@ -189,10 +194,10 @@ def quality_factor(P, dP):
     return -np.log(P) / dP
 
 
-def most_penetrating_size(d_f, U0, alpha, thickness, d_min=0.01e-6, d_max=2e-6, n=2000):
+def most_penetrating_size(d_f, U0, alpha, thickness, d_min=0.01e-6, d_max=2e-6, n=2000, rho_p=RHO_NACL):
     """Scan particle sizes on a log grid and return (d_mpps, P_max)."""
     d_grid = np.logspace(np.log10(d_min), np.log10(d_max), n)
-    P = penetration(d_grid, d_f, U0, alpha, thickness)
+    P = penetration(d_grid, d_f, U0, alpha, thickness, rho_p)
     i = int(np.argmax(P))
     return d_grid[i], P[i]
 

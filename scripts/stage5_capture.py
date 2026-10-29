@@ -23,8 +23,8 @@ Results: results/stage5/capture_<structure>.csv (one row per cell and size; appe
 rerun to continue), results/stage5/interception_checks_<structure>.csv, and (with the hexagonal
 array) results/stage5/mechanisms_hexagonal.csv: each mechanism alone and all together, near the MPPS.
 Run from the project folder:   python scripts/stage5_capture.py          (about 9 hours on one core; see README for running it in two windows)
-Two cores:                     python scripts/stage5_capture.py square hexagonal random
-                               python scripts/stage5_capture.py random_poly
+Two cores:                     python scripts/stage5_capture.py hexagonal random
+                               python scripts/stage5_capture.py square random_poly
 Then:                          python scripts/stage5_summary.py
 """
 
@@ -76,12 +76,13 @@ def layouts(structure):
     return out
 
 
-def particle_parameters(d_p_um):
-    """Dimensionless parameters (lengths in a_mean = d_f/2, speeds in U0, time in a/U0)."""
+def particle_parameters(d_p_um, d_f=D_F, U=U0, rho_p=cm.RHO_NACL):
+    """Dimensionless parameters (lengths in a_mean = d_f/2, speeds in U, time in a/U).
+    The defaults are the filter of Stage 1; Stage 6 changes d_f, U and the particle density."""
     d_p = d_p_um * 1e-6
-    Pe = float(cm.peclet(d_p, D_F, U0))
-    Stk = float(cm.stokes_number(d_p, D_F, U0))
-    r_p = d_p / D_F                    # particle radius / fibre radius
+    Pe = float(cm.peclet(d_p, d_f, U))
+    Stk = float(cm.stokes_number(d_p, d_f, U, rho_p))
+    r_p = d_p / d_f                    # particle radius / fibre radius
     D = 2.0 / Pe                       # D_p / (a U0)
     St = 2.0 * Stk                     # tau U0 / a
     return r_p, Pe, Stk, St, D
@@ -93,14 +94,14 @@ def time_step(D):
     return min(0.04, 0.005 * (D / 4.0) ** (2.0 / 3.0) / D)
 
 
-def model(d_p_um):
+def model(d_p_um, d_f=D_F, U=U0, rho_p=cm.RHO_NACL):
     """The particle model used for one size (main.tex Section 8.3): Brownian motion, interception AND
     inertia for every size (the full Langevin equation, Eq. 8.1). Inertia matters even for small
     Stokes numbers: air curving round a fibre throws particles outward, which lowers capture by about
     20% near the MPPS (measured in Section 8.5). The step h is the diffusion step of time_step(D),
     and at most St/8 so that the particle's velocity relaxation is resolved.
     Returns r_p, D, the St used and the step h."""
-    r_p, Pe, Stk, St, D = particle_parameters(d_p_um)
+    r_p, Pe, Stk, St, D = particle_parameters(d_p_um, d_f, U, rho_p)
     return r_p, D, St, min(time_step(D), St / 8.0)
 
 

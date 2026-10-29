@@ -51,14 +51,17 @@ scripts/stage4_summary.py            statistics, orientation rule, figures for e
 scripts/stage5_validation.py         flow next to fibres, tracker against exact answers and theory
 scripts/stage5_capture.py            experiment (c): capture by square, hexagonal and random arrays
 scripts/stage5_summary.py            efficiencies, MPPS, penetration, quality factor, figures
+scripts/stage6_design.py             experiments (d) design study and (e) fibre-size spread; sensitivity runs
+scripts/stage6_summary.py            quality factors, elasticities, layered filters (Proposition 10), figures
 scripts/make_bib.py                   builds paper/refs.bib from the literature table
 checks/check_stage1.py                all Stage 1 checks (and proof that each check can fail)
 checks/check_stage2.py                all Stage 2 checks, plus a re-run of the Stage 1 checks
 checks/check_stage3.py                all Stage 3 checks, plus a re-run of the Stage 1 and 2 checks
 checks/check_stage4.py                all Stage 4 checks, plus a re-run of the Stage 1-3 checks
 checks/check_stage5.py                all Stage 5 checks, plus a re-run of the Stage 1-4 checks
+checks/check_stage6.py                all Stage 6 checks, plus a re-run of the Stage 1-5 checks
 literature/literature_table.csv       every reference, its role, and how it was verified
-results/stage1/ ... results/stage5/  CSV outputs and summary numbers
+results/stage1/ ... results/stage6/  CSV outputs and summary numbers
 paper/                                LaTeX draft (kept out of GitHub)
 ```
 
@@ -88,6 +91,9 @@ python scripts\stage5_validation.py
 python scripts\stage5_capture.py
 python scripts\stage5_summary.py
 python checks\check_stage5.py
+python scripts\stage6_design.py
+python scripts\stage6_summary.py
+python checks\check_stage6.py
 ```
 
 `stage3_random_arrays.py` takes about 80-90 minutes on one core; it saves every result as it goes and
@@ -180,6 +186,27 @@ in two windows at the same time. The results are included, so `python checks\che
 two cores, run `python scripts\stage5_capture.py hexagonal random` and `python scripts\stage5_capture.py square random_poly`
 in two windows (about 4.5 hours each). `stage5_validation.py` takes about 40 minutes. The results are included, so
 `python checks\check_stage5.py` can be run directly (about 5 minutes).
+
+## Stage 6 results (design study and sensitivity)
+
+- For a given design the quality factor does not depend on the filter thickness: q_F = alpha eta k d_f / (pi mu U),
+  so the worst particle size is where the single-fibre efficiency is smallest.
+- Proposition 10: for independent layers in series, the stack's quality factor at every particle size is the
+  pressure-drop-weighted mean of its layers'. A stack can only raise the worst case, and only if the second layer
+  beats the first at the first layer's MPPS. A fine (1.5 um) + coarse (6 um) stack gains about 3%, not resolved
+  from zero.
+- Over eight designs (fibre diameter, face velocity, solid fraction, NaCl or oil aerosol) the computed q_F at the
+  MPPS on the hexagonal array is only 0.74-0.90 of the classical value, but the classical formulas get the trends with fibre diameter and face velocity
+  about right; q_F falls with solid fraction faster than they predict. The test aerosol makes no measurable difference.
+- Random arrays of identical fibres have 9-24% higher q_F than the hexagonal array at solid fraction 0.1 or less;
+  at 0.15 the comparison is not resolved.
+- A wide spread of fibre sizes (CV = 0.5) raises q_F by about 13% (16 cells per spread).
+- Blob width and near-wall settings change capture by at most about 2%; larger cells show no effect of cell size
+  and no correlation between successive cell lengths (the test of the independent-layer model).
+
+`stage6_design.py` takes about 13 hours on one core (it saves as it goes). To use two cores, run
+`python scripts\stage6_design.py random1 poly` and `python scripts\stage6_design.py hexagonal random2 sensitivity`
+in two windows. The results are included, so `python checks\check_stage6.py` can be run directly (about 10 minutes).
 
 ## Scope
 
