@@ -345,7 +345,7 @@ def check_numbers_in_text(tex_path=TEX):
     full = open(tex_path, encoding="utf-8").read()
     # only Section 7 counts: a number elsewhere in the paper must not satisfy the check by chance
     start = full.find("\\section{The 3D solver and the permeability of fibre networks}")
-    end = full.find("\\section{Methods: use of AI tools}")
+    end = full.find("\\section{", start + 10)                 # the next section
     tex = full[start:end] if 0 <= start < end else ""
     flat = re.sub(r"\s+", " ", tex)
     rows = expected_table_rows()

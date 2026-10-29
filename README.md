@@ -17,7 +17,7 @@ q_F = -ln(P) / dP?
 | 2 | Theory, model formulation, our own 2D kernels | Done |
 | 3 | 2D solver, validation, convergence, random 2D arrays | Done |
 | 4 | 3D solver, validation, permeability of random 3D networks | Done |
-| 5 | Particle transport and capture efficiency | — |
+| 5 | Particle transport and capture efficiency (2D) | Done |
 | 6 | Design study and sensitivity analysis | — |
 | 7 | Discussion, journal template, reference check | — |
 
@@ -34,6 +34,9 @@ src/reference_bie.py                 independent exact references: spectral boun
 src/rs_kernels3d.py                  our 3D Gaussian regularized Stokeslet (velocity, pressure)
 src/periodic3d.py                    our triply periodic version (Ewald summation)
 src/geometry3d.py                    periodic straight fibres in 3D: lattices, random networks, blob points
+src/flowfield2d.py                   fast exact copy of the 2D RS flow (FFT + B-spline) and the near-wall
+                                     reconstruction around each fibre
+src/particles2d.py                   particle tracker: Brownian motion, interception, inertia; capture
 src/solver3d.py                      our 3D solver: surface method with pressure balance, centreline model,
                                      permeability tensor
 scripts/stage1_classical_baselines.py tables and figures of the classical baselines
@@ -45,13 +48,17 @@ scripts/stage3_cv_test.py            why 40 layouts: control test with nearly id
 scripts/stage4_validation.py         3D kernel checks; lattices with exact answers; crossing lattice; timing
 scripts/stage4_networks.py           experiment (b): random 3D networks (layered, cubic, aligned) + 2D inputs
 scripts/stage4_summary.py            statistics, orientation rule, figures for experiment (b)
+scripts/stage5_validation.py         flow next to fibres, tracker against exact answers and theory
+scripts/stage5_capture.py            experiment (c): capture by square, hexagonal and random arrays
+scripts/stage5_summary.py            efficiencies, MPPS, penetration, quality factor, figures
 scripts/make_bib.py                   builds paper/refs.bib from the literature table
 checks/check_stage1.py                all Stage 1 checks (and proof that each check can fail)
 checks/check_stage2.py                all Stage 2 checks, plus a re-run of the Stage 1 checks
 checks/check_stage3.py                all Stage 3 checks, plus a re-run of the Stage 1 and 2 checks
 checks/check_stage4.py                all Stage 4 checks, plus a re-run of the Stage 1-3 checks
+checks/check_stage5.py                all Stage 5 checks, plus a re-run of the Stage 1-4 checks
 literature/literature_table.csv       every reference, its role, and how it was verified
-results/stage1/ ... results/stage4/  CSV outputs and summary numbers
+results/stage1/ ... results/stage5/  CSV outputs and summary numbers
 paper/                                LaTeX draft (kept out of GitHub)
 ```
 
@@ -77,6 +84,10 @@ python scripts\stage4_validation.py
 python scripts\stage4_networks.py
 python scripts\stage4_summary.py
 python checks\check_stage4.py
+python scripts\stage5_validation.py
+python scripts\stage5_capture.py
+python scripts\stage5_summary.py
+python checks\check_stage5.py
 ```
 
 `stage3_random_arrays.py` takes about 80-90 minutes on one core; it saves every result as it goes and
@@ -143,6 +154,32 @@ These are the numbers the regularized Stokeslet simulations will be compared aga
 `stage4_networks.py` takes about 3-4 hours on one core (results are saved as they come and the script continues where
 it stopped). To use two cores, run `python scripts\stage4_networks.py 0.1` and `python scripts\stage4_networks.py 0.15`
 in two windows at the same time. The results are included, so `python checks\check_stage4.py` can be run directly (about 3-5 minutes).
+
+## Stage 5 results (particle capture, 2D)
+
+- The regularized Stokeslet flow slips along the fibre surface (about 3% of the mean speed at eps = 0.05a, first
+  order in eps), exactly where particles are caught. Proposition 9 replaces the flow in a thin ring around each fibre by
+  the exact no-slip Stokes flow that matches the RS flow farther out: the error next to the fibre drops from 9e-3 to
+  4e-4 of the mean speed.
+- The tracker reproduces the exact interception answer, straight-line motion of heavy particles, and the boundary-layer
+  (Leveque) theory for Brownian capture within its statistical error.
+- Even a small particle inertia matters: air curving round the shoulders of a fibre throws particles outward, which
+  lowers interception by about 11% at the Stokes number of a 0.25 um particle and lowers total capture there by 9-17%
+  (more than the kinetic boundary layer of Brownian motion alone would).
+  So every particle is followed with Brownian motion, interception and inertia together (full Langevin equation).
+- Filter of Stage 1 (d_f = 3 um, alpha = 0.1, 0.1 m/s, 0.5 mm): the classical formulas over-predict capture near the
+  most penetrating size (penetration 0.465 on the hexagonal array instead of 0.396, or 0.357 with Hinds' recipe; MPPS
+  about 0.28 instead of 0.21 um, a shift that is only just resolved). Without inertia, diffusion plus interception agree with the classical E_D + E_R + E_DR; the
+  difference is that inertia lowers capture in the simulation but the classical impaction correlation raises it.
+- Random arrays of identical fibres catch about as much as the hexagonal array at the MPPS (ratio 0.94, interval
+  0.86-1.08) but have about 21% lower pressure drop, so their quality factor is about 19% higher (interval 13-32%).
+  A fibre-size spread lowers the pressure drop again; its effect on capture and on the quality factor is not resolved
+  with six cells.
+
+`stage5_capture.py` takes about 9 hours on one core (it saves as it goes, so it can be stopped and restarted). To use
+two cores, run `python scripts\stage5_capture.py hexagonal random` and `python scripts\stage5_capture.py square random_poly`
+in two windows (about 4.5 hours each). `stage5_validation.py` takes about 40 minutes. The results are included, so
+`python checks\check_stage5.py` can be run directly (about 5 minutes).
 
 ## Scope
 

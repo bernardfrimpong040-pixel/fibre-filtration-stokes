@@ -1,0 +1,2 @@
+structure,seed,r_p,f_exact,f_tracker,n_particles
+hexagonal,0,0.1,0.006345663115422733,0.0064,10000

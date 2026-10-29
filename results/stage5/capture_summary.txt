@@ -1,0 +1,21 @@
+square array (1 cell): k/a^2 = 1.2652, pressure drop 317.9 Pa; MPPS 0.257 um, eta there 0.0344, penetration 0.482, q_F at the MPPS 2.29e-03 1/Pa; particles left in the cell at the time limit: 0
+hexagonal array (1 cell): k/a^2 = 1.2500, pressure drop 321.8 Pa; MPPS 0.276 um, eta there 0.0361, penetration 0.465, q_F at the MPPS 2.38e-03 1/Pa; particles left in the cell at the time limit: 0
+random, identical fibres (6 cells): k/a^2 = 1.5773, pressure drop 255.0 Pa; MPPS 0.252 um, eta there 0.0340, penetration 0.486, q_F at the MPPS 2.83e-03 1/Pa; particles left in the cell at the time limit: 0
+random, CV = 0.5 (6 cells): k/a^2 = 1.9670, pressure drop 204.5 Pa; MPPS 0.251 um, eta there 0.0279, penetration 0.553, q_F at the MPPS 2.90e-03 1/Pa; particles left in the cell at the time limit: 1
+classical (Stage 1, Kuwabara-based formulas): MPPS 0.207 um, penetration 0.357, pressure drop 322.6 Pa, q_F 3.19e-03 1/Pa
+classical formulas with the convention of Eq. 8.6: MPPS 0.207 um, penetration 0.396, pressure drop 322.6 Pa, q_F 2.87e-03 1/Pa
+square array: MPPS 95% interval [0.210, 0.306] um
+hexagonal array: MPPS 95% interval [0.209, 0.314] um
+random, identical fibres: MPPS 95% interval [0.230, 0.287] um
+random, CV = 0.5: MPPS 95% interval [0.224, 0.300] um
+random / hexagonal: eta at the MPPS 0.942 [0.863, 1.075], pressure drop 0.793 [0.725, 0.872], q_F at the MPPS 1.189 [1.128, 1.317]
+random CV = 0.5 / random identical: eta at the MPPS 0.822 [0.635, 1.053], pressure drop 0.802 [0.677, 0.951], q_F at the MPPS 1.025 [0.893, 1.144]
+square array: eta / classical eta ranges 0.26-1.18 over 0.02-1 um
+hexagonal array: eta / classical eta ranges 0.40-1.21 over 0.02-1 um
+random, identical fibres: eta / classical eta ranges 0.38-0.91 over 0.02-1 um
+random, CV = 0.5: eta / classical eta ranges 0.41-0.77 over 0.02-1 um
+hexagonal, d_p = 0.12 um: diffusion alone 0.0503, interception alone 0.0028, sum 0.0531, both without inertia 0.0634, extra from acting together 0.0103 +- 0.0055 (2 s.e.), with inertia 0.0576 (change -0.092); classical E_D 0.0450, E_R 0.0028, E_DR 0.0085, total 0.0562
+hexagonal, d_p = 0.25 um: diffusion alone 0.0229, interception alone 0.0117, sum 0.0346, both without inertia 0.0405, extra from acting together 0.0059 +- 0.0044 (2 s.e.), with inertia 0.0368 (change -0.093); classical E_D 0.0208, E_R 0.0116, E_DR 0.0077, total 0.0455
+hexagonal, d_p = 0.5 um: diffusion alone 0.0122, interception alone 0.0443, sum 0.0565, both without inertia 0.0624, extra from acting together 0.0058 +- 0.0056 (2 s.e.), with inertia 0.0580 (change -0.071); classical E_D 0.0111, E_R 0.0430, E_DR 0.0077, total 0.1232
+inlet lines of all runs: smallest clearance from a capture circle 0.165 a_mean
+interception check on all 14 cells (10000 particles, r_p = 0.1a): largest difference from the exact answer 0.34 particles per fibre

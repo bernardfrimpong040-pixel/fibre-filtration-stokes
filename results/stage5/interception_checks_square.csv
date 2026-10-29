@@ -1,0 +1,2 @@
+structure,seed,r_p,f_exact,f_tracker,n_particles
+square,0,0.1,0.006712606167652369,0.0067,10000

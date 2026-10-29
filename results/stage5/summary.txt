@@ -1,0 +1,23 @@
+fast field vs direct RS sum: spectral grid values 2.6e-15, spline anywhere 8.9e-06 (units of U)
+RS flow at the fibre surface (square, alpha = 0.1, top point): u = +0.0584 U for eps = 0.1a (reconstructed: +1.1e-19)
+RS flow at the fibre surface (square, alpha = 0.1, top point): u = +0.0311 U for eps = 0.05a (reconstructed: +2.2e-19)
+velocity error against the exact flow within 0.1a of a fibre (eps = 0.05a): reconstructed <= 3.6e-04 U, RS without reconstruction <= 8.6e-03 U
+pure interception, tracker vs exact (40000 particles, 8 cases): largest difference 1.7 particles (the stratified inlet allows about 1 per interval end)
+small-R law (square): caught fraction gamma_max r_p^2 / Ly = 7.254e-05 vs exact 7.200e-05 at r_p = 0.01a; gamma_max = 4.0661 U/a
+straight-line particles (St = 1e6): 0 of 8000 disagree with the geometric prediction
+Pe =   300: tracker caught 0.02610 +- 0.00113, Leveque 0.02694, ratio 0.969 +- 0.042 (20000 particles)
+Pe =  1000: tracker caught 0.01145 +- 0.00053, Leveque 0.01207, ratio 0.948 +- 0.044 (40000 particles)
+Pe =  3000: tracker caught 0.00623 +- 0.00025, Leveque 0.00580, ratio 1.073 +- 0.043 (100000 particles)
+Pe = 10000: tracker caught 0.00246 +- 0.00011, Leveque 0.00260, ratio 0.946 +- 0.043 (200000 particles)
+Brownian (Pe = 100, 100000 particles, standard error 0.0007), h = 0.04, 0.02, 0.01, 0.005: caught 0.0565, 0.0572, 0.0574, 0.0585 with the bridge correction; 0.0548, 0.0556, 0.0564, 0.0569 without
+inertia (St = 0.5, r_p = 0.2a, 40000 particles), h = 0.04, 0.02, 0.01: caught 0.02495, 0.02480, 0.02475
+0.25 um without inertia (overdamped, 100000 particles, standard error 0.00038), h = 0.04, 0.02, 0.01: caught 0.01496, 0.01468, 0.01477
+0.25 um as in experiment (c), with inertia (St = 0.0465), h = St/8, St/16, St/32: caught 0.01190, 0.01208, 0.01223; relative to the value without inertia -0.172
+0.5 um as in experiment (c) (St = 0.1458), h = St/4, St/8, St/16: caught 0.01680, 0.01721, 0.01740
+interception with inertia, no diffusion (r_p = 0.0833a, 40000 particles), St = 0.0116, 0.0465, 0.1862: caught relative to exact interception without inertia -0.036, -0.115, -0.206
+interception with inertia at St = 0.0465, h = St/8, St/16, St/32: caught relative to exact -0.115, -0.115, -0.110
+kinetic boundary layer at 0.25 um: lambda = sqrt(D St) = 0.0070a, delta = (D/4)^(1/3) = 0.064a; overdamped with the capture circle pulled in by 1.03 lambda and 1.5 lambda: caught 0.01394, 0.01346, relative to the value without inertia -0.056, -0.089 (standard error of each value 0.00035; with inertia -0.172)
+still air next to an absorbing wall (100000 particles): absorbed fraction corresponds to a wall moved back by 1.38 lambda (h = St/8) and 1.45 lambda (h = St/32); overdamped (no shift) 0.1573
+interception, eta (Eq. 8.6) on the hexagonal array / Kuwabara cell: 0.984 (r_p = 0.01a), 0.985 (r_p = 0.05a), 0.988 (r_p = 0.1a), 0.996 (r_p = 0.2a)
+Leveque on Kuwabara's flow: eta_D = 3.521 Pe^(-2/3) = 2.792 Ku^(-1/3) Pe^(-2/3) (classical high-Pe constant 2.9 Ku^(-1/3); Lee and Liu's E_D uses 3.165)
+total run time 52.0 minutes
